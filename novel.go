@@ -24,7 +24,7 @@ type Chapter struct {
 }
 
 func parseNovel(novel *Novel) {
-	txtBytes, err := os.ReadFile(novel.Title + ".txt")
+	txtBytes, err := os.ReadFile(novel.TxtPath)
 	if err != nil {
 		panic(err)
 	}

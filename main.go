@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"image"
 	"image/color"
 	"image/jpeg"
@@ -14,6 +15,7 @@ import (
 )
 
 type Novel struct {
+	TxtPath  string
 	UUID     string
 	Title    string
 	Author   string
@@ -118,12 +120,13 @@ func clean(novel Novel) {
 	}
 }
 
-func createNovel(title, author, language string) Novel {
+func createNovel(txtPath, title, author, language string) Novel {
 	bookId, err := uuid.NewRandom()
 	if err != nil {
 		panic(err)
 	}
 	return Novel{
+		TxtPath:  txtPath,
 		Title:    title,
 		Author:   author,
 		Language: language,
@@ -142,7 +145,18 @@ func editSuffix(novel Novel) {
 
 func main() {
 
-	novel := createNovel("凡人修仙传", "忘语", "zh")
+	txtPath := flag.String("path", "", "网文txt路径")
+	title := flag.String("title", "", "网文名称")
+	author := flag.String("author", "未知", "网文作者")
+
+	flag.Parse()
+
+	if *txtPath == "" || *title == "" {
+		flag.Usage()
+		return
+	}
+
+	novel := createNovel(*txtPath, *title, *author, "zh")
 
 	// 删除生成文件夹
 	clean(novel)
