@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="BookID" version="2.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+    <dc:title>{{.title}}</dc:title>
+    <dc:creator>{{.author}}</dc:creator>
+    <dc:identifier id="BookID" opf:scheme="UUID">urn:uuid:{{.uuid}}</dc:identifier>
+    <dc:Language>{{.language}}</dc:Language>
+    <meta name="cover" content="cover"></meta>
+  </metadata>
+  <manifest>
+    <item href="text/titlepage.xhtml" id="titlepage" media-type="application/xhtml+xml"/>
+    <item href="text/internal_titlepage.xhtml" id="internal_titlepage" media-type="application/xhtml+xml"/>
+    {{range $index,$item := .items}}<item media-type="application/xhtml+xml" id="{{$item.Id}}" href="{{$item.Href}}" />
+    {{end}}
+    <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
+    <item id="cover" href="images/cover.jpg" media-type="image/jpeg" />
+    <item id="stylesheet" href="styles/stylesheet.css" media-type="text/css" />
+  </manifest>
+
+  <spine toc="ncx">
+    <itemref idref="titlepage"/>
+    <itemref idref="internal_titlepage" />
+    {{range $index,$item := .items}}<itemref idref="{{$item.Id}}"/>
+    {{end}}
+  </spine>
+  <guide>
+    <reference href="text/titlepage.xhtml" title="Cover" type="cover"/>
+  </guide>
+</package>
