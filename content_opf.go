@@ -14,7 +14,7 @@ type OpfItem struct {
 
 func genContentOpf(novel Novel) {
 
-	t, err := template.ParseFiles("templates/content.opf.tmpl")
+	t, err := template.ParseFS(root, "templates/content.opf.tmpl")
 	if err != nil {
 		panic(err)
 	}

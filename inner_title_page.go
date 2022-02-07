@@ -7,7 +7,7 @@ import (
 )
 
 func genInnerTitlePage(novel Novel) {
-	t, err := template.ParseFiles("templates/inner_title_page.tmpl")
+	t, err := template.ParseFS(root, "templates/inner_title_page.tmpl")
 	if err != nil {
 		panic(err)
 	}

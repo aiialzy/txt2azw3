@@ -112,7 +112,7 @@ func removeDuplicate(novel []Chapter) (result []Chapter) {
 }
 
 func genXHTML(title string, chapter Chapter) string {
-	t, err := template.ParseFiles("templates/text.tmpl")
+	t, err := template.ParseFS(root, "templates/text.tmpl")
 	if err != nil {
 		panic(err)
 	}

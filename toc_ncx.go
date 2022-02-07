@@ -16,7 +16,7 @@ type NavMapItem struct {
 }
 
 func genTocNcx(novel Novel) {
-	t, err := template.ParseFiles("templates/toc.ncx.tmpl")
+	t, err := template.ParseFS(root, "templates/toc.ncx.tmpl")
 	if err != nil {
 		panic(err)
 	}
